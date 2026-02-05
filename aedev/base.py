@@ -50,11 +50,10 @@ from urllib import request, error
 
 from packaging.version import Version
 
-
 from ae.base import env_str, norm_name, read_file       # type: ignore
 
 
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 
 
 APP_PRJ = 'app'                                         #: gui application project
