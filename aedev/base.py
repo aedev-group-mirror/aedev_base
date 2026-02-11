@@ -53,7 +53,7 @@ from packaging.version import Version
 from ae.base import env_str, norm_name, read_file       # type: ignore
 
 
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -80,6 +80,10 @@ PROJECT_VERSION_SEP = '=='                              #: separates package nam
 
 PYPI_ROOT_URL = "https://pypi.org"                      #: PyPI cheeseshop production domain with service
 PYPI_ROOT_URL_TEST = "https://test.pypi.org"            #: PyPI cheeseshop test domain with service
+
+TEST_PROJECTS_PARENT_FOLDER = 'TsT'                     #: integration/unit tests projects local machine parent folder
+TEST_PROJECTS_NAMESPACE = 'aetst'                       #: integration/unit tests namespace
+TEST_PROJECTS_REMOTE = 'gitlab.com'                     #: git remote domain of integration/unit tests projects
 
 VERSION_QUOTE = "'"                                     #: quote character of the __version__ number variable value
 VERSION_PREFIX = "__version__ = " + VERSION_QUOTE       #: search string to find the __version__ variable
@@ -154,13 +158,14 @@ def get_pypi_versions(pip_name: str, pypi_test: Optional[bool] = None) -> list[s
     :param pip_name:            pip|package|project name to get release versions from.
     :param pypi_test:           pass True to use the test version of PyPI (at test.pypi.org). if not specified or None
                                 then the test version of PyPI will be used if :paramref:`~get_pypi_versions.pip_name`
-                                starts with 'aetst' (the projects namespace used for the pjm integration tests).
+                                starts with the projects namespace (:data:`~aedev.base.TEST_PROJECTS_NAMESPACE),
+                                used for the pjm integration tests).
     :return:                    list of released versions (the latest last) or
                                 on error a list with a single empty string item.
     .. note:: if the OS environment variable ``PIP_INDEX_URL`` is set, then its value is used instead of ``pypi.org``.
     """
     if pypi_test is None:
-        pypi_test = pip_name.startswith('aetst')    # no project path available to check for 'TsT' parent folder
+        pypi_test = pip_name.startswith(TEST_PROJECTS_NAMESPACE)    # no path to check for TEST_PROJECTS_PARENT_FOLDER
     pypi_root_url = PYPI_ROOT_URL_TEST if pypi_test else (env_str("PIP_INDEX_URL") or "").rstrip('/') or PYPI_ROOT_URL
 
     try:

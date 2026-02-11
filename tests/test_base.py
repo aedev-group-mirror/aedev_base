@@ -9,7 +9,7 @@ from aedev.base import (
     APP_PRJ, DJANGO_PRJ, MODULE_PRJ, NO_PRJ, PACKAGE_PRJ, PARENT_PRJ, PLAYGROUND_PRJ, ROOT_PRJ,
     ANY_PRJ_TYPE, ALL_PRJ_TYPES,
     COMMIT_MSG_FILE_NAME, DEF_MAIN_BRANCH, PIP_CMD, PIP_INSTALL_CMD, PYPI_ROOT_URL, PYPI_ROOT_URL_TEST,
-    VERSION_MATCHER, VERSION_PREFIX, VERSION_QUOTE,
+    TEST_PROJECTS_NAMESPACE, VERSION_MATCHER, VERSION_PREFIX, VERSION_QUOTE,
     code_file_title, code_file_version, code_version, get_pypi_versions, project_name_version)
 
 
@@ -140,8 +140,9 @@ class TestHelpers:
         assert "0.3.54" in get_pypi_versions('ae_base')
         assert "0.3.81" in get_pypi_versions('ae_console')
 
-        assert "0.3.3" in get_pypi_versions('aetst_aetst', pypi_test=True)  # force to use test domain test.pypi.org
-        assert get_pypi_versions('aetst_aetst', pypi_test=False) == [""]    # force to use live domain pypi.org
+        root_prj = f'{TEST_PROJECTS_NAMESPACE}_{TEST_PROJECTS_NAMESPACE}'
+        assert "0.3.3" in get_pypi_versions(root_prj, pypi_test=True)   # force to use test domain test.pypi.org
+        assert get_pypi_versions(root_prj, pypi_test=False) == [""]     # force to use live domain pypi.org
 
     def test_project_name_version(self):
         pkg, ver = project_name_version('', ['a_b', 'b_c'])
