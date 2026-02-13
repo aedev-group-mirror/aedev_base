@@ -53,7 +53,7 @@ from packaging.version import Version
 from ae.base import env_str, norm_name, read_file       # type: ignore
 
 
-__version__ = '0.3.3'
+__version__ = '0.3.4'
 
 
 APP_PRJ = 'app'                                         #: gui application project
