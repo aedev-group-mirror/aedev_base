@@ -35,8 +35,8 @@ development operations (DevOps) and tools:
 - :type:`TemplateProjectsType`: project_templates var type (added by pjm/project_manager).
 - :type:`CachedTemplates`: cache mapping of registered project templates.
 
-- :func:`code_file_title`: determines the docstring title of a python code file.
-- :func:`code_file_version`: reads the version number of a python code file from the `__version__` module variable.
+- :func:`code_file_title`: determines the docstring title of a Python code file.
+- :func:`code_file_version`: reads the version number of a Python code file from the `__version__` module variable.
 - :func:`code_version`: determines a version number from a specified content string (e.g., file content) using a
   configurable prefix and suffix.
 - :func:`get_pypi_versions`: determines all available release versions of a package on PyPI.
@@ -53,7 +53,7 @@ from packaging.version import Version
 from ae.base import env_str, norm_name, read_file       # type: ignore
 
 
-__version__ = '0.3.4'
+__version__ = '0.3.5'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -110,7 +110,7 @@ def code_file_title(file_name: str) -> str:
     """
     title = ""
     try:
-        lines = read_file(file_name).split('\n')
+        lines = read_file(file_name).splitlines()
         for idx, line in enumerate(lines):
             if line.startswith('"""'):
                 title = (line[3:].strip() or lines[idx + 1].strip()).strip('"').strip()
@@ -159,7 +159,7 @@ def get_pypi_versions(pip_name: str, pypi_test: Optional[bool] = None) -> list[s
     :param pypi_test:           pass True to use the test version of PyPI (at test.pypi.org). if not specified or None
                                 then the test version of PyPI will be used if :paramref:`~get_pypi_versions.pip_name`
                                 starts with the projects namespace (:data:`~aedev.base.TEST_PROJECTS_NAMESPACE),
-                                used for the pjm integration tests).
+                                used for the pjm integration tests.
     :return:                    list of released versions (the latest last) or
                                 on error a list with a single empty string item.
     .. note:: if the OS environment variable ``PIP_INDEX_URL`` is set, then its value is used instead of ``pypi.org``.
