@@ -1,12 +1,12 @@
-<!-- THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.aedev v0.3.30 -->
-<!-- THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.namespace_root_tpls v0.3.21 -->
-# base 0.3.4
+<!-- THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.aedev v0.3.32 -->
+<!-- THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.namespace_root_tpls v0.3.27 -->
+# base 0.3.5
 
 [![GitLab develop](https://img.shields.io/gitlab/pipeline/aedev-group/aedev_base/develop?logo=python)](
     https://gitlab.com/aedev-group/aedev_base)
 [![LatestPyPIrelease](
-    https://img.shields.io/gitlab/pipeline/aedev-group/aedev_base/release0.3.4?logo=python)](
-    https://gitlab.com/aedev-group/aedev_base/-/tree/release0.3.4)
+    https://img.shields.io/gitlab/pipeline/aedev-group/aedev_base/release0.3.5?logo=python)](
+    https://gitlab.com/aedev-group/aedev_base/-/tree/release0.3.5)
 [![PyPIVersions](https://img.shields.io/pypi/v/aedev_base)](
     https://pypi.org/project/aedev-base/#history)
 
@@ -35,8 +35,8 @@
     https://pypi.org/project/aedev-base/#files)
 
 
-## installation
 
+## installation
 
 execute the following command to install the
 aedev.base module
@@ -69,7 +69,9 @@ https://gitlab.com/aedev-group/aedev_base/-/blob/develop/CONTRIBUTING.rst)
 
 ## namespace portion documentation
 
-information on the features and usage of this portion are available at
+the documentation of the source code of this portion is available at
 [ReadTheDocs](
 https://aedev.readthedocs.io/en/latest/_autosummary/aedev.base.html
 "aedev_base documentation").
+
+
