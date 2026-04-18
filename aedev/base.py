@@ -53,7 +53,7 @@ from packaging.version import Version
 from ae.base import env_str, norm_name, read_file       # type: ignore
 
 
-__version__ = '0.3.5'
+__version__ = '0.3.6'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -72,6 +72,8 @@ ALL_PRJ_TYPES = ANY_PRJ_TYPE + (NO_PRJ, PARENT_PRJ)     #: all project types (in
 
 COMMIT_MSG_FILE_NAME = '.commit_msg.txt'                #: name of the file containing the commit message
 DEF_MAIN_BRANCH = 'develop'                             #: main/develop/default branch name
+
+PACKAGE_NAME_SEPS = ('_', '-', '.')                     #: separators considered equivalent for comparison (:pep:`503`)
 
 PIP_CMD = "pip"                                         #: pip command using python venvs, especially on Windows
 PIP_INSTALL_CMD = f"{PIP_CMD} install"                  #: pip install command
