@@ -1,9 +1,11 @@
 """ aedev.base unit tests """
 import os
 import re
+
 import pytest
 
 from ae.base import os_path_join, write_file
+
 
 from aedev.base import (
     APP_PRJ, DJANGO_PRJ, MODULE_PRJ, NO_PRJ, PACKAGE_PRJ, PARENT_PRJ, PLAYGROUND_PRJ, ROOT_PRJ,
