@@ -1,12 +1,12 @@
-<!-- THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.aedev v0.3.32 -->
-<!-- THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.namespace_root_tpls v0.3.27 -->
-# base 0.3.7
+<!-- THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.aedev v0.3.33 -->
+<!-- THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.namespace_root_tpls vlocal -->
+# base 0.3.8
 
 [![GitLab develop](https://img.shields.io/gitlab/pipeline/aedev-group/aedev_base/develop?logo=python)](
     https://gitlab.com/aedev-group/aedev_base)
 [![LatestPyPIrelease](
-    https://img.shields.io/gitlab/pipeline/aedev-group/aedev_base/release0.3.7?logo=python)](
-    https://gitlab.com/aedev-group/aedev_base/-/tree/release0.3.7)
+    https://img.shields.io/gitlab/pipeline/aedev-group/aedev_base/release0.3.8?logo=python)](
+    https://gitlab.com/aedev-group/aedev_base/-/tree/release0.3.8)
 [![PyPIVersions](https://img.shields.io/pypi/v/aedev_base)](
     https://pypi.org/project/aedev-base/#history)
 
@@ -54,13 +54,17 @@ following command in the root folder of this repository
 (aedev_base):
 
 ```shell script
-pip install -e .[dev]
+pip install --editable .[dev]
 ```
 
-the last command will install this module portion, along with the tools you need
-to develop and run tests or to extend the portion documentation. to contribute only to the unit tests or to the
-documentation of this portion, replace the setup extras key `dev` in the above command with `tests` or `docs`
-respectively.
+this command installs this module portion project
+along with the necessary tools to modify the source code,
+run unit tests, and build documentation. to install only
+the dependencies required for a specific task,  replace
+`dev` with one of the following:
+
+    * `tests`: for contributing to the unit test suite
+    * `docs`: for maintaining and building documentation
 
 more detailed explanations on how to contribute to this project
 [are available here](

@@ -54,7 +54,7 @@ from packaging.version import Version
 from ae.base import env_str, norm_name, read_file       # type: ignore
 
 
-__version__ = '0.3.7'
+__version__ = '0.3.8'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -167,7 +167,7 @@ def get_pypi_versions(pip_name: str, pypi_test: Optional[bool] = None) -> list[s
     """
     if pypi_test is None:
         pypi_test = pip_name.startswith(TEST_PROJECTS_NAMESPACE)    # no path to check for TEST_PROJECTS_PARENT_FOLDER
-    pypi_root_url = PYPI_ROOT_URL_TEST if pypi_test else (env_str("PIP_INDEX_URL") or "").rstrip('/') or PYPI_ROOT_URL
+    pypi_root_url = PYPI_ROOT_URL_TEST if pypi_test else (env_str("PIP_INDEX_URL") or "").rstrip("/") or PYPI_ROOT_URL
 
     try:
         with request.urlopen(f"{pypi_root_url}/pypi/{pip_name}/json", timeout=12) as response:
