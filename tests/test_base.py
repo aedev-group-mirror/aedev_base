@@ -10,7 +10,7 @@ from ae.base import os_path_join, write_file
 from aedev.base import (
     APP_PRJ, DJANGO_PRJ, MODULE_PRJ, NO_PRJ, PACKAGE_PRJ, PARENT_PRJ, PLAYGROUND_PRJ, ROOT_PRJ,
     ANY_PRJ_TYPE, ALL_PRJ_TYPES,
-    COMMIT_MSG_FILE_NAME, DEF_MAIN_BRANCH, PIP_CMD, PIP_INSTALL_CMD, PYPI_ROOT_URL, PYPI_ROOT_URL_TEST,
+    COMMIT_MSG_FILE_NAME, DEF_MAIN_BRANCH, PIP_CMD, PYPI_ROOT_URL, PYPI_ROOT_URL_TEST,
     TEST_PROJECTS_NAMESPACE, VERSION_MATCHER, VERSION_PREFIX, VERSION_QUOTE,
     code_file_title, code_file_version, code_version, get_pypi_versions, project_name_version)
 
@@ -28,7 +28,6 @@ class TestConstants:
         assert COMMIT_MSG_FILE_NAME
         assert DEF_MAIN_BRANCH
         assert PIP_CMD
-        assert PIP_INSTALL_CMD
         assert PYPI_ROOT_URL
         assert PYPI_ROOT_URL_TEST
         assert VERSION_MATCHER

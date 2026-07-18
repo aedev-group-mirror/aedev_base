@@ -19,8 +19,7 @@ development operations (DevOps) and tools:
 - :data:`COMMIT_MSG_FILE_NAME`: the default filename for commit messages.
 - :data:`DEF_MAIN_BRANCH`: the name of the default/main branch.
 
-- :data:`PIP_CMD`: the pip command.
-- :data:`PIP_INSTALL_CMD`: the `pip install` command.
+- :data:`PIP_CMD`: the pip command - as used in a shell or on the command line.
 
 - :data:`PYPI_ROOT_URL`: the production PyPI URL.
 - :data:`PYPI_ROOT_URL_TEST`: the test PyPI URL.
@@ -46,15 +45,16 @@ development operations (DevOps) and tools:
 import json
 import re
 
-from typing import Iterable, Optional, Union
+from collections.abc import Iterable
 from urllib import request, error
 
 from packaging.version import Version
 
 from ae.base import env_str, norm_name, read_file       # type: ignore
+from ae.system import os_platform                       # type: ignore
 
 
-__version__ = '0.3.8'
+__version__ = '0.3.9'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -74,8 +74,7 @@ ALL_PRJ_TYPES = ANY_PRJ_TYPE + (NO_PRJ, PARENT_PRJ)     #: all project types (in
 COMMIT_MSG_FILE_NAME = '.commit_msg.txt'                #: name of the file containing the commit message
 DEF_MAIN_BRANCH = 'develop'                             #: main/develop/default branch name
 
-PIP_CMD = "pip"                                         #: pip command using python venvs, especially on Windows
-PIP_INSTALL_CMD = f"{PIP_CMD} install"                  #: pip install command
+PIP_CMD = "pip" if os_platform == 'win32' else "pip3"   #: pip command using python venvs, different especially on MSWin
 
 PROJECT_VERSION_SEP = '=='                              #: separates package name and version in pip req files
 
@@ -134,7 +133,7 @@ def code_file_version(file_name: str) -> str:
         return ""
 
 
-def code_version(content: Union[str, bytes], prefix: str = "^" + VERSION_PREFIX, suffix: str = VERSION_QUOTE) -> str:
+def code_version(content: str | bytes, prefix: str = "^" + VERSION_PREFIX, suffix: str = VERSION_QUOTE) -> str:
     """ determine a version number from the specified content string.
 
     :param content:             content of type str or bytes to be searched for the definition/declaration of a version.
@@ -153,7 +152,7 @@ def code_version(content: Union[str, bytes], prefix: str = "^" + VERSION_PREFIX,
         return ""
 
 
-def get_pypi_versions(pip_name: str, pypi_test: Optional[bool] = None) -> list[str]:
+def get_pypi_versions(pip_name: str, pypi_test: bool | None = None) -> list[str]:
     """ determine all the available release versions of a package hosted at the PyPI 'Cheese Shop'.
 
     :param pip_name:            pip|package|project name to get release versions from.
