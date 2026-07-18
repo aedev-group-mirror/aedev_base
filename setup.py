@@ -1,15 +1,14 @@
-# THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.project_tpls v0.3.79
+# THIS FILE IS EXCLUSIVELY MAINTAINED by the project aedev.project_tpls v0.3.82
 """ setup of aedev namespace module portion base: base development constants and helpers. """
-import sys
-# noinspection PyUnresolvedReferences
 import pathlib
-# noinspection PyUnresolvedReferences
+import sys
+from typing import Any
 import setuptools
 
 
 print("SetUp " + __name__ + ": " + sys.executable + str(sys.argv) + f" {sys.path=}")
 
-setup_kwargs = {
+setup_kwargs: dict[str, Any] = {
     'author': 'AndiEcker',
     'author_email': 'aecker2@gmail.com',
     'classifiers': [
@@ -51,6 +50,7 @@ setup_kwargs = {
     'install_requires': [
         'packaging',
         'ae_base',
+        'ae_system',
     ],
     'keywords': [
         'configuration',
@@ -76,10 +76,10 @@ setup_kwargs = {
     },
     'python_requires': '>=3.12',
     'url': 'https://gitlab.com/aedev-group/aedev_base',
-    'version': '0.3.8',
+    'version': '0.3.9',
     'zip_safe': True,
 }
 
 if __name__ == "__main__":
     setuptools.setup(**setup_kwargs)
-    pass
+    ...
