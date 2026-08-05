@@ -54,7 +54,7 @@ from ae.base import env_str, norm_name, read_file       # type: ignore
 from ae.system import os_platform                       # type: ignore
 
 
-__version__ = '0.3.9'
+__version__ = '0.3.10'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -153,16 +153,18 @@ def code_version(content: str | bytes, prefix: str = "^" + VERSION_PREFIX, suffi
 
 
 def get_pypi_versions(pip_name: str, pypi_test: bool | None = None) -> list[str]:
-    """ determine all the available release versions of a package hosted at the PyPI 'Cheese Shop'.
+    """ determine all the available release versions of a package hosted at the PyPI Cheese Shop.
 
     :param pip_name:            pip|package|project name to get release versions from.
-    :param pypi_test:           pass True to use the test version of PyPI (at test.pypi.org). if not specified or None
-                                then the test version of PyPI will be used if :paramref:`~get_pypi_versions.pip_name`
-                                starts with the projects namespace (:data:`~aedev.base.TEST_PROJECTS_NAMESPACE),
-                                used for the pjm integration tests.
-    :return:                    list of released versions (the latest last) or
+    :param pypi_test:           pass `True` to use the test version of PyPI (at <test.pypi.org>). also if this argument
+                                got not specified or is `None`, and the :paramref:`~get_pypi_versions.pip_name` argument
+                                starts with the test projects namespace (:data:`~aedev.base.TEST_PROJECTS_NAMESPACE`),
+                                then the test version of PyPI will be used (e.g. for the pjm integration tests).
+    :return:                    list of released versions (the latest one last) or
                                 on error a list with a single empty string item.
-    .. note:: if the OS environment variable ``PIP_INDEX_URL`` is set, then its value is used instead of ``pypi.org``.
+
+    .. note:: if the OS environment variable `PIP_INDEX_URL` is set, then its value is used instead of `pypi.org`.
+
     """
     if pypi_test is None:
         pypi_test = pip_name.startswith(TEST_PROJECTS_NAMESPACE)    # no path to check for TEST_PROJECTS_PARENT_FOLDER
