@@ -40,7 +40,7 @@ development operations (DevOps) and tools:
   configurable prefix and suffix.
 - :func:`get_pypi_versions`: determines all available release versions of a package on PyPI.
 - :func:`project_name_version`: determine package name and version in the specified list of package/version strings.
-
+- :func:`stripped_pip_name`: convert required project/distribution/package line into a normalized PyPI/pip package name.
 """
 import json
 import re
@@ -51,10 +51,10 @@ from urllib import request, error
 from packaging.version import Version
 
 from ae.base import env_str, norm_name, read_file       # type: ignore
-from ae.system import os_platform                       # type: ignore
+from ae.system import norm_pip_name, os_platform        # type: ignore
 
 
-__version__ = '0.3.10'
+__version__ = '0.3.11'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -203,3 +203,12 @@ def project_name_version(imp_or_pkg_name: str, packages_versions: Iterable[str])
         if prj_name == project_name:
             return project_name, ver[0] if ver else ""
     return "", ""
+
+
+def stripped_pip_name(req_project_name: str) -> str:
+    """ convert a requiring project/distribution/package line from a requirements.txt file into a normalized pip name.
+
+    :param req_project_name:    required project/distribution/package line with an optional version string or spaces.
+    :return:                    stripped and normalized pip name of the specified PyPI project/distribution/package.
+    """
+    return norm_pip_name(req_project_name.strip().split(" ")[0].split(PROJECT_VERSION_SEP)[0])
