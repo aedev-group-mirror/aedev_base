@@ -8,11 +8,11 @@ from ae.base import os_path_join, write_file
 
 
 from aedev.base import (
-    APP_PRJ, DJANGO_PRJ, MODULE_PRJ, NO_PRJ, PACKAGE_PRJ, PARENT_PRJ, PLAYGROUND_PRJ, ROOT_PRJ,
+    APP_PRJ, DJANGO_PRJ, MODULE_PRJ, NO_PRJ, PACKAGE_PRJ, PARENT_PRJ, PLAYGROUND_PRJ, PROJECT_VERSION_SEP, ROOT_PRJ,
     ANY_PRJ_TYPE, ALL_PRJ_TYPES,
     COMMIT_MSG_FILE_NAME, DEF_MAIN_BRANCH, PIP_CMD, PYPI_ROOT_URL, PYPI_ROOT_URL_TEST,
     TEST_PROJECTS_NAMESPACE, VERSION_MATCHER, VERSION_PREFIX, VERSION_QUOTE,
-    code_file_title, code_file_version, code_version, get_pypi_versions, project_name_version)
+    code_file_title, code_file_version, code_version, get_pypi_versions, project_name_version, stripped_pip_name)
 
 
 class TestConstants:
@@ -165,3 +165,9 @@ class TestHelpers:
         pkg, ver = project_name_version('a.b', ['bc', 'c_d', 'a_b==1.2.3'])
         assert pkg == 'a_b'
         assert ver == "1.2.3"
+
+    def test_stripped_pip_name(self):
+        assert stripped_pip_name("dot.name") == "dot-name"
+        assert stripped_pip_name("under_name") == "under-name"
+        assert stripped_pip_name("stripped-name") == "stripped-name"
+        assert stripped_pip_name(f"name{PROJECT_VERSION_SEP}1.2.6") == "name"
