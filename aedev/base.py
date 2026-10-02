@@ -21,8 +21,8 @@ development operations (DevOps) and tools:
 
 - :data:`PIP_CMD`: the pip command - as used in a shell or on the command line.
 
-- :data:`PYPI_ROOT_URL`: the production PyPI URL.
-- :data:`PYPI_ROOT_URL_TEST`: the test PyPI URL.
+- :data:`PYPI_ROOT_URL`: the PyPI production host URL.
+- :data:`PYPI_TEST_URL`: the PyPI test host URL.
 
 - :data:`PROJECT_VERSION_SEP`: the separator used in Pip requirements files to ty/fix a project to a version.
 - :data:`VERSION_QUOTE`: the quote character used for the `__version__` variable value (typically `'`).
@@ -50,11 +50,11 @@ from urllib import request, error
 
 from packaging.version import Version
 
-from ae.base import env_str, norm_name, read_file       # type: ignore
-from ae.system import norm_pip_name, os_platform        # type: ignore
+from ae.base import URI_SVC_SEP, env_str, norm_name, read_file      # type: ignore
+from ae.system import norm_pip_name, os_platform                    # type: ignore
 
 
-__version__ = '0.3.11'
+__version__ = '0.3.12'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -78,8 +78,8 @@ PIP_CMD = "pip" if os_platform == 'win32' else "pip3"   #: pip command using pyt
 
 PROJECT_VERSION_SEP = '=='                              #: separates package name and version in pip req files
 
-PYPI_ROOT_URL = "https://pypi.org"                      #: PyPI cheeseshop production domain with service
-PYPI_ROOT_URL_TEST = "https://test.pypi.org"            #: PyPI cheeseshop test domain with service
+PYPI_ROOT_URL = f"https{URI_SVC_SEP}pypi.org"           #: PyPI cheeseshop production domain with service
+PYPI_TEST_URL = f"https{URI_SVC_SEP}test.pypi.org"      #: PyPI cheeseshop test domain with service
 
 TEST_PROJECTS_PARENT_FOLDER = 'TsT'                     #: integration/unit tests projects local machine parent folder
 TEST_PROJECTS_NAMESPACE = 'aetst'                       #: integration/unit tests namespace
@@ -157,7 +157,7 @@ def get_pypi_versions(pip_name: str, pypi_test: bool | None = None) -> list[str]
 
     :param pip_name:            pip|package|project name to get release versions from.
     :param pypi_test:           pass `True` to use the test version of PyPI (at <test.pypi.org>). also if this argument
-                                got not specified or is `None`, and the :paramref:`~get_pypi_versions.pip_name` argument
+                                got not specified or is `None`, and the :paramref:`.pip_name` argument
                                 starts with the test projects namespace (:data:`~aedev.base.TEST_PROJECTS_NAMESPACE`),
                                 then the test version of PyPI will be used (e.g. for the pjm integration tests).
     :return:                    list of released versions (the latest one last) or
@@ -168,7 +168,7 @@ def get_pypi_versions(pip_name: str, pypi_test: bool | None = None) -> list[str]
     """
     if pypi_test is None:
         pypi_test = pip_name.startswith(TEST_PROJECTS_NAMESPACE)    # no path to check for TEST_PROJECTS_PARENT_FOLDER
-    pypi_root_url = PYPI_ROOT_URL_TEST if pypi_test else (env_str("PIP_INDEX_URL") or "").rstrip("/") or PYPI_ROOT_URL
+    pypi_root_url = PYPI_TEST_URL if pypi_test else (env_str("PIP_INDEX_URL") or "").rstrip("/") or PYPI_ROOT_URL
 
     try:
         with request.urlopen(f"{pypi_root_url}/pypi/{pip_name}/json", timeout=12) as response:
@@ -192,9 +192,9 @@ def project_name_version(imp_or_pkg_name: str, packages_versions: Iterable[str])
     :param packages_versions:   an Iterable with project package name and optional version strings, like specified in
                                 requirements.txt files (format: <project_name>[<PROJECT_VERSION_SEP><project_version>]).
     :return:                    tuple of package name and version number. the package name is an empty string if it
-                                is not in :paramref:`~project_version.packages_versions`. the version number is an
+                                is not in :paramref:`.packages_versions`. the version number is an
                                 empty string if no package version is specified in
-                                :paramref:`~project_version.packages_versions`.
+                                :paramref:`.packages_versions`.
     """
     project_name = norm_name(imp_or_pkg_name)
     for imp_or_pkg_name_and_ver in packages_versions:
