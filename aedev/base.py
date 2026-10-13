@@ -54,7 +54,7 @@ from ae.base import URI_SVC_SEP, env_str, norm_name, read_file      # type: igno
 from ae.system import norm_pip_name, os_platform                    # type: ignore
 
 
-__version__ = '0.3.12'
+__version__ = '0.3.13'
 
 
 APP_PRJ = 'app'                                         #: gui application project
@@ -78,8 +78,8 @@ PIP_CMD = "pip" if os_platform == 'win32' else "pip3"   #: pip command using pyt
 
 PROJECT_VERSION_SEP = '=='                              #: separates package name and version in pip req files
 
-PYPI_ROOT_URL = f"https{URI_SVC_SEP}pypi.org"           #: PyPI cheeseshop production domain with service
-PYPI_TEST_URL = f"https{URI_SVC_SEP}test.pypi.org"      #: PyPI cheeseshop test domain with service
+PYPI_ROOT_URL = f"https{URI_SVC_SEP}pypi.org"           #: PyPI cheese shop production domain with service
+PYPI_TEST_URL = f"https{URI_SVC_SEP}test.pypi.org"      #: PyPI cheese shop test domain with service
 
 TEST_PROJECTS_PARENT_FOLDER = 'TsT'                     #: integration/unit tests projects local machine parent folder
 TEST_PROJECTS_NAMESPACE = 'aetst'                       #: integration/unit tests namespace
@@ -137,7 +137,7 @@ def code_version(content: str | bytes, prefix: str = "^" + VERSION_PREFIX, suffi
     """ determine a version number from the specified content string.
 
     :param content:             content of type str or bytes to be searched for the definition/declaration of a version.
-    :param prefix:              version string prefix (directly before the veesion number).
+    :param prefix:              version string prefix (directly before the version number).
     :param suffix:              version string suffix char/string (directly after the version number string).
                                 passing an empty is not allowed, and will always return an empty string.
     :return:                    version number string or empty string if version could not be not found in content.
@@ -189,8 +189,9 @@ def project_name_version(imp_or_pkg_name: str, packages_versions: Iterable[str])
     """ determine package name and version in the specified list of package/version strings.
 
     :param imp_or_pkg_name:     import or package name to search.
-    :param packages_versions:   an Iterable with project package name and optional version strings, like specified in
-                                requirements.txt files (format: <project_name>[<PROJECT_VERSION_SEP><project_version>]).
+    :param packages_versions:   iterable where each item specifies a project via its project package name and an
+                                optional version strings, like specified in requirements.txt files
+                                (format: <project_name>[<:data:`PROJECT_VERSION_SEP`><project_version>]).
     :return:                    tuple of package name and version number. the package name is an empty string if it
                                 is not in :paramref:`.packages_versions`. the version number is an
                                 empty string if no package version is specified in
