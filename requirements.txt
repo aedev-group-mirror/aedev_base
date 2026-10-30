@@ -1,4 +1,5 @@
 # runtime dependencies of the aedev.base project
 packaging
 ae_base
+ae_app_log
 ae_system
