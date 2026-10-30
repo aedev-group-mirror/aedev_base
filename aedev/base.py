@@ -76,7 +76,7 @@ from ae.app_log import ErrorMsgMixin                                # type: igno
 from ae.system import module_load, norm_pip_name, os_platform       # type: ignore
 
 
-__version__ = '0.3.14'
+__version__ = '0.3.15'
 
 
 APP_PRJ = 'app'                                         #: gui application project

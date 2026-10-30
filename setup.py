@@ -50,6 +50,7 @@ setup_kwargs: dict[str, Any] = {
     'install_requires': [
         'packaging',
         'ae_base',
+        'ae_app_log',
         'ae_system',
     ],
     'keywords': [
@@ -76,7 +77,7 @@ setup_kwargs: dict[str, Any] = {
     },
     'python_requires': '>=3.12',
     'url': 'https://gitlab.com/aedev-group/aedev_base',
-    'version': '0.3.14',
+    'version': '0.3.15',
     'zip_safe': True,
 }
 
